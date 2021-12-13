@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id "org.openjfx.javafxplugin" version "0.0.10"
+    id "org.beryx.jlink" version "2.24.4"
 }
 
 group 'com.gradle.with.fx'
@@ -27,4 +28,15 @@ javafx {
     version = "11"
 }
 
-mainClassName = "com.gradle.with.fx.Main"
+jlink {
+    launcher {
+        name = 'jfx_with_gradle'
+    }
+}
+
+application {
+    mainModule = 'fx.with.gradle.main'
+    mainClass = 'com.gradle.with.fx.Main'
+}
+// SOURCE: https://bitbucket.org/FlPe/javafx_jlink_example/src/master/
+// mainClassName = "com.gradle.with.fx.Main"
