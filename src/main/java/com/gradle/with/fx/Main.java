@@ -1,10 +1,9 @@
 package com.gradle.with.fx;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -15,13 +14,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        /*Label label = new Label("Hello world");
-        Scene scene = new Scene(label);
-        primaryStage.setScene(scene);
-        primaryStage.show();*/
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+
+        String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version");
+
+        /*Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));*/
         primaryStage.setTitle("Hello World for JDK + JFX 11");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(new StackPane(new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".")), 300, 275));
         primaryStage.show();
     }
 }

@@ -13,14 +13,14 @@ repositories {
     mavenCentral()
 }
 
-/*dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-}*/
+dependencies {
+    // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
 
-/*test {
-    useJUnitPlatform()
-}*/
+test {
+    // useJUnitPlatform()
+}
 
 javafx {
     modules = ["javafx.controls", "javafx.fxml"]
@@ -28,3 +28,12 @@ javafx {
 }
 
 mainClassName = "com.gradle.with.fx.Main"
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.gradle.with.fx.Launcher'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

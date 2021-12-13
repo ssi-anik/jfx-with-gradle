@@ -12,5 +12,5 @@
           xmlns:fx="http://javafx.com/fxml"
           prefHeight="400.0" prefWidth="600.0"
           alignment="center" hgap="10" vgap="10">
-    <Label>JFX with gradle!!</Label>
+    <Label fx:id="label"></Label>
 </GridPane>
