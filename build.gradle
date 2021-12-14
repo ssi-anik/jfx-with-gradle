@@ -55,4 +55,4 @@ task renameArchiveBaseName {
     setProperty('archivesBaseName', getProperty("archivesBaseName") + "-" + os_family)
 }
 
-jar.dependsOn clean, renameArchiveBaseName
+jar.dependsOn renameArchiveBaseName
