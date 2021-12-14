@@ -16,6 +16,9 @@ repositories {
 dependencies {
     // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:win"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:linux"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:mac"
 }
 
 test {
@@ -24,7 +27,7 @@ test {
 
 javafx {
     modules = ["javafx.controls", "javafx.fxml"]
-    version = "11"
+    version = "11.0.2"
 }
 
 mainClassName = "com.gradle.with.fx.Main"
