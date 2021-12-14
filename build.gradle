@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 plugins {
     id 'java'
     id 'application'
@@ -5,7 +7,7 @@ plugins {
 }
 
 group 'com.gradle.with.fx'
-version '1.0'
+//version '1.0'
 
 sourceCompatibility = 11
 
@@ -31,6 +33,7 @@ javafx {
 }
 
 mainClassName = "com.gradle.with.fx.Main"
+archivesBaseName = 'jfx-with-gradle'
 
 jar {
     manifest {
@@ -40,3 +43,16 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
+task renameArchiveBaseName {
+    String os_family = "linux"
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        os_family = "windows"
+    } else if (Os.isFamily(Os.FAMILY_MAC)) {
+        os_family = "mac"
+    }
+
+    setProperty('archivesBaseName', getProperty("archivesBaseName") + "-" + os_family)
+}
+
+jar.dependsOn clean, renameArchiveBaseName
