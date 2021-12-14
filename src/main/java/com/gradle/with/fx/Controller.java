@@ -70,7 +70,10 @@ public class Controller implements Initializable {
         Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses();
         for (InetAddress inetAddress : Collections.list(inetAddresses)) {
 //            System.out.printf("InetAddress: %s\n", inetAddress);
-            list.add(inetAddress.toString());
+            //list.add(inetAddress.toString());
+            list.add(inetAddress.getHostName());
+            list.add(inetAddress.getHostAddress());
+            //System.out.println(inetAddress.getHostAddress());
         }
 
         return list;
