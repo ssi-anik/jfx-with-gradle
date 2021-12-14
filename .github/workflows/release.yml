@@ -1,0 +1,47 @@
+name: Release Application
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  publish:
+    name: Build & Release for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-latest, ubuntu-latest, macos-latest ]
+        include:
+          - build_command: "./gradlew jar"
+
+          - os: windows-latest
+            build_command: "./gradlew.bat jar"
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: adopt-openj9
+          cache: 'gradle'
+
+      - name: Build application
+        run: ${{ matrix.build_command }}
+
+      - name: Release asset
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          draft: false
+          prerelease: false
+          files: |
+            build/libs/**/*.jar
